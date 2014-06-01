@@ -4,7 +4,7 @@ require 'rspec'
 describe "Deck" do
   let(:deck) {Deck.new}
 
-  context "initialize" do
+  context "#initialize" do
     it "should create a card array" do
       expect(deck.cards).to be_an(Array)
     end
