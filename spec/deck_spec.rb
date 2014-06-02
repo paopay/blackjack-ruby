@@ -1,4 +1,4 @@
-require_relative '../deck.rb'
+require_relative '../deck'
 require 'rspec'
 
 describe "Deck" do

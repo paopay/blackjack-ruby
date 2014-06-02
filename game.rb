@@ -1,6 +1,6 @@
-require_relative 'deck.rb'
-require_relative 'player.rb'
-require_relative 'view.rb'
+require_relative 'deck'
+require_relative 'player'
+require_relative 'view'
 
 class Game
   attr_reader :player, :dealer
@@ -73,11 +73,4 @@ class Game
     dealer_turn
     compare_score
   end
-
 end
-
-deck = Deck.new
-player = Player.new
-dealer = Dealer.new
-game = Game.new(player, dealer, deck)
-game.play

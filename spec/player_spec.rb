@@ -1,4 +1,4 @@
-require_relative '../player.rb'
+require_relative '../player'
 require 'rspec'
 
 describe "Player" do
