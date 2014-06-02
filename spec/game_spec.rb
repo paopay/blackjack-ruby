@@ -32,6 +32,6 @@ describe "Game" do
   end
 
   context "#start" do
-    before(:each) {game.start!}
+    before(:each) {game.play}
   end
 end

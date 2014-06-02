@@ -6,12 +6,13 @@ class Player
   end
 
   def bust?
-    score > 21
+    self.score > 21
   end
 
   def update_current_score
     values = []
     hand.each {|card| values << card[1]}
+    @score = 0
 
     values.each do |value|
       @score += value.to_i if value =~ /\d/
@@ -25,8 +26,3 @@ end
 
 class Dealer < Player
 end
-
-# player = Player.new
-# player.hand = ["dt", "h2"]
-# player.update_current_score
-# p player.score
