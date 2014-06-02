@@ -1,26 +1,26 @@
 class Player
-  attr_accessor :score, :hand
+  attr_accessor :hand
   def initialize
-    @score = 0
     @hand = []
   end
 
   def bust?
-    self.score > 21
+    self.current_score > 21
   end
 
-  def update_current_score
+  def current_score
     values = []
     hand.each {|card| values << card[1]}
-    @score = 0
+    score = 0
 
     values.each do |value|
-      @score += value.to_i if value =~ /\d/
-      @score += 10 if value =~ /[t, j, q, k]/
+      score += value.to_i if value =~ /\d/
+      score += 10 if value =~ /[t, j, q, k]/
       if value =~ /[a]/
-        @score + 11 > 21 ? @score += 1 : @score += 11
+        score + 11 > 21 ? score += 1 : score += 11
       end
     end
+    score
   end
 end
 

@@ -16,8 +16,8 @@ class Game
       dealer.hand << @deck.pop
       player.hand << @deck.pop
     end
-    player.update_current_score
-    dealer.update_current_score
+    player.current_score
+    dealer.current_score
   end
 
   def deal!(plyr)
@@ -31,7 +31,7 @@ class Game
     case choice
     when 'h'
       deal!(player)
-      player.update_current_score
+      player.current_score
       View.show_cards_and_score(player)
       player_turn
     when 's'
@@ -44,16 +44,17 @@ class Game
   def play
     View.show_cards_and_score(player)
     View.show_cards_and_score(dealer)
-    until player.score < 21 || player_turn == 's'
+    until player_turn == 's'
       player_turn
+      return View.player_busted if player.bust
     end
 
   end
 
 end
 
-deck = Deck.new
-player = Player.new
-dealer = Dealer.new
-game = Game.new(player, dealer, deck)
-game.play
+# deck = Deck.new
+# player = Player.new
+# dealer = Dealer.new
+# game = Game.new(player, dealer, deck)
+# game.play

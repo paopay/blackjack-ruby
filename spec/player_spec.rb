@@ -6,33 +6,33 @@ describe "Player" do
 
   context "#bust?" do
     it "should return true if player's score is over 21" do
-      player.score = 22
+      player.stub(:current_score) {22}
       expect(player.bust?).to eq(true)
     end
 
     it "should return false if player's score is not over 21" do
-      player.score = 10
+      player.stub(:current_score) {10}
       expect(player.bust?).to eq(false)
     end
   end
 
-  context "#update_current_score" do
+  context "#current_score" do
     it 'should update the players score' do 
       player.hand = ['ct', 'd5', 'h3']
-      player.update_current_score
-      expect(player.score).to eq(18)
+      player.current_score
+      expect(player.current_score).to eq(18)
     end    
 
     it 'should be a soft ace when the score exceeds 21' do 
       player.hand = ['cj', 'd5', 'h3', 'ha']
-      player.update_current_score
-      expect(player.score).to eq(19)
+      player.current_score
+      expect(player.current_score).to eq(19)
     end
 
     it 'should be a hard ace when the score is below 21' do 
       player.hand = ['h3', 'ha']
-      player.update_current_score
-      expect(player.score).to eq(14)
+      player.current_score
+      expect(player.current_score).to eq(14)
     end
 
   end
