@@ -27,7 +27,7 @@ describe "Game" do
 
   context "#deal" do
     it "should deal one card" do
-      game.deal()
+      expect{game.deal!(game.player)}.to change{game.player.hand.length}.by(1)
     end
   end
 
