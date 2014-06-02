@@ -11,11 +11,10 @@ class Game
     initial_deal
   end
 
-  def initial_deal
-    2.times do
-      deal!(player)
-      deal!(dealer)
-    end
+  def play
+    player_turn
+    dealer_turn
+    compare_score
   end
 
   def deal!(plyr)
@@ -24,6 +23,16 @@ class Game
     plyr.current_score
     View.show_cards_and_score(plyr)
   end
+  
+  private
+  
+  def initial_deal
+    2.times do
+      deal!(player)
+      deal!(dealer)
+    end
+  end
+
 
   def player_turn
     View.ask_player_choice
@@ -32,9 +41,10 @@ class Game
     case choice
     when 'h'
       deal!(player)
-      play
+      return if player.bust?
+      player_turn
     when 's'
-      return nil
+      return
     else
       View.wrong_choice
       player_turn
@@ -64,13 +74,4 @@ class Game
     end
   end
 
-  def play
-    until player.bust?
-      break if player.current_score == 21
-      break if player_turn == nil
-      player_turn
-    end
-    dealer_turn
-    compare_score
-  end
 end
