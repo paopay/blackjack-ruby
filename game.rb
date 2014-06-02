@@ -13,15 +13,16 @@ class Game
 
   def initial_deal
     2.times do
-      dealer.hand << @deck.pop
-      player.hand << @deck.pop
+      deal!(player)
+      deal!(dealer)
     end
-    player.current_score
-    dealer.current_score
   end
 
   def deal!(plyr)
     plyr.hand << @deck.pop
+    View.card_drawn(plyr)
+    plyr.current_score
+    View.show_cards_and_score(plyr)
   end
 
   def player_turn
@@ -31,30 +32,52 @@ class Game
     case choice
     when 'h'
       deal!(player)
-      player.current_score
-      View.show_cards_and_score(player)
-      player_turn
+      play
     when 's'
-      return 's'
+      return nil
     else
       View.wrong_choice
+      player_turn
+    end
+  end
+
+  def dealer_turn
+    until dealer.current_score >= 17
+      deal!(dealer)
+      dealer_turn
+    end
+  end
+
+  def compare_score
+    if player.current_score == 21
+      View.blackjack!
+    elsif player.current_score > 21
+      View.player_bust        
+    elsif dealer.current_score > 21
+      View.dealer_bust
+    elsif player.current_score > dealer.current_score
+      View.player_wins
+    elsif player.current_score < dealer.current_score
+      View.player_loses
+    elsif player.current_score == dealer.current_score
+      View.draw
     end
   end
 
   def play
-    View.show_cards_and_score(player)
-    View.show_cards_and_score(dealer)
-    until player_turn == 's'
+    until player.bust?
+      break if player.current_score == 21
+      break if player_turn == nil
       player_turn
-      return View.player_busted if player.bust
     end
-
+    dealer_turn
+    compare_score
   end
 
 end
 
-# deck = Deck.new
-# player = Player.new
-# dealer = Dealer.new
-# game = Game.new(player, dealer, deck)
-# game.play
+deck = Deck.new
+player = Player.new
+dealer = Dealer.new
+game = Game.new(player, dealer, deck)
+game.play
