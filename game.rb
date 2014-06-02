@@ -17,6 +17,10 @@ class Game
     end
   end
 
+  def deal!(plyr)
+    plyr.hand << @deck.pop
+  end
+
   def start!
   end
 end

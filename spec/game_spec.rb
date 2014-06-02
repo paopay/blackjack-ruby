@@ -1,5 +1,3 @@
-# require_relative '../deck.rb'
-# require_relative '../player.rb'
 require_relative '../game.rb'
 require 'rspec'
 
@@ -24,6 +22,12 @@ describe "Game" do
 
     it "should deal two cards to the dealer" do
       expect(game.player.hand.length).to eq(2)
+    end
+  end
+
+  context "#deal" do
+    it "should deal one card" do
+      game.deal()
     end
   end
 

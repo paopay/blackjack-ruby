@@ -21,7 +21,20 @@ describe "Player" do
       player.hand = ['ct', 'd5', 'h3']
       player.update_current_score
       expect(player.score).to eq(18)
+    end    
+
+    it 'should be a soft ace when the score exceeds 21' do 
+      player.hand = ['cj', 'd5', 'h3', 'ha']
+      player.update_current_score
+      expect(player.score).to eq(19)
     end
+
+    it 'should be a hard ace when the score is below 21' do 
+      player.hand = ['h3', 'ha']
+      player.update_current_score
+      expect(player.score).to eq(14)
+    end
+
   end
 
 end
