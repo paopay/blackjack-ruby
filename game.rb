@@ -44,7 +44,7 @@ class Game
   def play
     View.show_cards_and_score(player)
     View.show_cards_and_score(dealer)
-    until player.bust? || player_turn == 's'
+    until player.score < 21 || player_turn == 's'
       player_turn
     end
 
