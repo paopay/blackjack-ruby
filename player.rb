@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :score
+  attr_accessor :score, :hand
   def initialize
     @score = 0
     @hand = []
