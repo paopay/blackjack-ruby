@@ -16,5 +16,12 @@ describe "Player" do
     end
   end
 
-  context
+  context "#update_current_score" do
+    it 'should update the players score' do 
+      player.hand = ['ct', 'd5', 'h3']
+      player.update_current_score
+      expect(player.score).to eq(18)
+    end
+  end
+
 end
